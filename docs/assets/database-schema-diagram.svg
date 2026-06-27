@@ -1,0 +1,229 @@
+<svg width="1680" height="1220" viewBox="0 0 1680 1220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1680" y2="1220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08111F"/>
+      <stop offset="1" stop-color="#10254A"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#13284F"/>
+      <stop offset="1" stop-color="#0C1B35"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#020817" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#60A5FA"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Inter, Arial, sans-serif; fill: #F8FAFC; }
+      .subtitle { font: 500 16px Inter, Arial, sans-serif; fill: #CBD5E1; }
+      .group { font: 700 14px Inter, Arial, sans-serif; fill: #93C5FD; letter-spacing: 0.08em; text-transform: uppercase; }
+      .table-title { font: 700 18px Inter, Arial, sans-serif; fill: #F8FAFC; }
+      .table-line { font: 500 13px Inter, Arial, sans-serif; fill: #CBD5E1; }
+      .pk { fill: #93C5FD; }
+      .fk { fill: #60A5FA; }
+      .hint { font: 500 12px Inter, Arial, sans-serif; fill: #94A3B8; }
+      .legend { font: 600 13px Inter, Arial, sans-serif; fill: #CBD5E1; }
+    </style>
+  </defs>
+
+  <rect width="1680" height="1220" rx="28" fill="url(#bg)"/>
+
+  <text x="72" y="70" class="title">Cyber Arena — схема базы данных</text>
+  <text x="72" y="98" class="subtitle">PostgreSQL-модель: пользователи, сессии, тесты, материалы, прогресс и рейтинг</text>
+
+  <text x="72" y="148" class="group">Auth и пользователи</text>
+  <text x="72" y="454" class="group">Материалы и обучение</text>
+  <text x="760" y="148" class="group">Тесты и интерактивные сценарии</text>
+  <text x="760" y="734" class="group">Результаты и аналитика</text>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="170" width="300" height="210" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="96" y="204" class="table-title">users</text>
+    <text x="96" y="230" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="96" y="252" class="table-line">email : text unique</text>
+    <text x="96" y="274" class="table-line">password_hash : text</text>
+    <text x="96" y="296" class="table-line">display_name : text</text>
+    <text x="96" y="318" class="table-line">city : text</text>
+    <text x="96" y="340" class="table-line">primary_track : text</text>
+    <text x="96" y="362" class="table-line">role : app_role</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="402" y="170" width="250" height="170" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="426" y="204" class="table-title">user_sessions</text>
+    <text x="426" y="230" class="table-line"><tspan class="pk">PK</tspan> token : text</text>
+    <text x="426" y="252" class="table-line"><tspan class="fk">FK</tspan> user_id : uuid</text>
+    <text x="426" y="274" class="table-line">created_at : timestamptz</text>
+    <text x="426" y="296" class="table-line">expires_at : timestamptz</text>
+    <text x="426" y="318" class="table-line">revoked_at : timestamptz</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="402" y="360" width="250" height="130" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="426" y="394" class="table-title">teams</text>
+    <text x="426" y="420" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="426" y="442" class="table-line">name : text unique</text>
+    <text x="426" y="464" class="table-line">city : text</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="476" width="300" height="180" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="96" y="510" class="table-title">materials</text>
+    <text x="96" y="536" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="96" y="558" class="table-line">slug : text unique</text>
+    <text x="96" y="580" class="table-line">title : text</text>
+    <text x="96" y="602" class="table-line">category : text</text>
+    <text x="96" y="624" class="table-line">level : difficulty_level</text>
+    <text x="96" y="646" class="table-line">status : content_status</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="402" y="520" width="250" height="120" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="426" y="554" class="table-title">material_sections</text>
+    <text x="426" y="580" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="426" y="602" class="table-line"><tspan class="fk">FK</tspan> material_id : uuid</text>
+    <text x="426" y="624" class="table-line">body_markdown : text</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="402" y="660" width="250" height="120" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="426" y="694" class="table-title">material_highlights</text>
+    <text x="426" y="720" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="426" y="742" class="table-line"><tspan class="fk">FK</tspan> material_id : uuid</text>
+    <text x="426" y="764" class="table-line">value : text</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="700" width="300" height="120" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="96" y="734" class="table-title">material_bookmarks</text>
+    <text x="96" y="760" class="table-line"><tspan class="fk">FK</tspan> user_id : uuid</text>
+    <text x="96" y="782" class="table-line"><tspan class="fk">FK</tspan> material_id : uuid</text>
+    <text x="96" y="804" class="table-line">created_at : timestamptz</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="840" width="300" height="140" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="96" y="874" class="table-title">material_progress</text>
+    <text x="96" y="900" class="table-line"><tspan class="fk">FK</tspan> user_id : uuid</text>
+    <text x="96" y="922" class="table-line"><tspan class="fk">FK</tspan> material_id : uuid</text>
+    <text x="96" y="944" class="table-line">status : progress_status</text>
+    <text x="96" y="966" class="table-line">completed_at : timestamptz</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="760" y="170" width="320" height="220" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="784" y="204" class="table-title">tests</text>
+    <text x="784" y="230" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="784" y="252" class="table-line">slug : text unique</text>
+    <text x="784" y="274" class="table-line">title : text</text>
+    <text x="784" y="296" class="table-line">category : text</text>
+    <text x="784" y="318" class="table-line">difficulty : difficulty_level</text>
+    <text x="784" y="340" class="table-line">mode : test_mode</text>
+    <text x="784" y="362" class="table-line">status : content_status</text>
+    <text x="784" y="384" class="table-line">config_json : jsonb</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1110" y="170" width="250" height="140" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="1134" y="204" class="table-title">test_benefits</text>
+    <text x="1134" y="230" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="1134" y="252" class="table-line"><tspan class="fk">FK</tspan> test_id : uuid</text>
+    <text x="1134" y="274" class="table-line">value : text</text>
+    <text x="1134" y="296" class="table-line">sort_order : integer</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1110" y="330" width="250" height="140" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="1134" y="364" class="table-title">test_deck_items</text>
+    <text x="1134" y="390" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="1134" y="412" class="table-line"><tspan class="fk">FK</tspan> test_id : uuid</text>
+    <text x="1134" y="434" class="table-line">value : text</text>
+    <text x="1134" y="456" class="table-line">sort_order : integer</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="760" y="430" width="320" height="160" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="784" y="464" class="table-title">test_questions</text>
+    <text x="784" y="490" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="784" y="512" class="table-line"><tspan class="fk">FK</tspan> test_id : uuid</text>
+    <text x="784" y="534" class="table-line">prompt : text</text>
+    <text x="784" y="556" class="table-line">explanation : text</text>
+    <text x="784" y="578" class="table-line">sort_order : integer</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1110" y="510" width="250" height="160" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="1134" y="544" class="table-title">test_question_options</text>
+    <text x="1134" y="570" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="1134" y="592" class="table-line"><tspan class="fk">FK</tspan> question_id : uuid</text>
+    <text x="1134" y="614" class="table-line">label : text</text>
+    <text x="1134" y="636" class="table-line">is_correct : boolean</text>
+    <text x="1134" y="658" class="table-line">sort_order : integer</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="760" y="756" width="320" height="180" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="784" y="790" class="table-title">test_attempts</text>
+    <text x="784" y="816" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="784" y="838" class="table-line"><tspan class="fk">FK</tspan> test_id : uuid</text>
+    <text x="784" y="860" class="table-line"><tspan class="fk">FK</tspan> user_id : uuid</text>
+    <text x="784" y="882" class="table-line">score : integer</text>
+    <text x="784" y="904" class="table-line">label : text</text>
+    <text x="784" y="926" class="table-line">tier_name : text</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1110" y="780" width="250" height="160" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="1134" y="814" class="table-title">attempt_answers</text>
+    <text x="1134" y="840" class="table-line"><tspan class="pk">PK</tspan> id : uuid</text>
+    <text x="1134" y="862" class="table-line"><tspan class="fk">FK</tspan> attempt_id : uuid</text>
+    <text x="1134" y="884" class="table-line"><tspan class="fk">FK</tspan> question_id : uuid</text>
+    <text x="1134" y="906" class="table-line"><tspan class="fk">FK</tspan> selected_option_id : uuid</text>
+    <text x="1134" y="928" class="table-line">is_correct : boolean</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1410" y="760" width="210" height="120" rx="22" fill="url(#card)" stroke="#3B82F6" stroke-opacity="0.32"/>
+    <text x="1434" y="794" class="table-title">leaderboard_current</text>
+    <text x="1434" y="820" class="table-line">user_id</text>
+    <text x="1434" y="842" class="table-line">best_score</text>
+    <text x="1434" y="864" class="table-line">tier_name</text>
+  </g>
+
+  <path d="M372 246 C 390 246, 386 246, 402 246" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M372 340 C 420 340, 360 424, 402 424" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M372 564 C 386 564, 390 580, 402 580" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M372 566 C 420 566, 380 720, 402 720" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M222 476 C 222 430, 222 410, 222 380" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M222 700 C 222 680, 222 668, 222 656" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M222 840 C 222 826, 222 824, 222 820" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M372 760 C 560 760, 560 846, 760 846" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M372 906 C 560 906, 560 860, 760 860" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M1080 250 C 1094 250, 1098 250, 1110 250" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1080 340 C 1098 340, 1090 400, 1110 400" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M920 390 C 920 406, 920 416, 920 430" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1080 510 C 1098 510, 1090 590, 1110 590" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M920 590 C 920 650, 920 698, 920 756" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1080 846 C 1094 846, 1098 846, 1110 846" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M920 590 C 1160 590, 980 884, 1110 884" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1235 670 C 1235 724, 1235 740, 1235 780" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <path d="M1080 838 C 1240 838, 1260 820, 1410 820" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="72" y="1040" width="540" height="120" rx="20" fill="#0B1730" fill-opacity="0.7" stroke="#3B82F6" stroke-opacity="0.18"/>
+  <circle cx="108" cy="1078" r="7" fill="#93C5FD"/>
+  <text x="126" y="1083" class="legend">PK — первичный ключ</text>
+  <circle cx="108" cy="1112" r="7" fill="#60A5FA"/>
+  <text x="126" y="1117" class="legend">FK — внешний ключ</text>
+  <text x="72" y="1008" class="group">Легенда</text>
+
+  <rect x="760" y="1040" width="820" height="120" rx="20" fill="#0B1730" fill-opacity="0.7" stroke="#3B82F6" stroke-opacity="0.18"/>
+  <text x="784" y="1078" class="legend">Ключевая логика схемы:</text>
+  <text x="784" y="1104" class="hint">1. Пользователь создаёт сессию через user_sessions и работает в системе как авторизованный участник.</text>
+  <text x="784" y="1128" class="hint">2. Контент разделён на две доменные области: tests и materials.</text>
+  <text x="784" y="1152" class="hint">3. Рейтинг строится из best_score пользователя на основе таблицы test_attempts и представления leaderboard_current.</text>
+</svg>
